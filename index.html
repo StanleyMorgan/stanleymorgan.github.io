@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web3 Portfolio | Stanley Morgan</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <script>
       console.log("HTML: Script initialization started");
@@ -14,16 +15,6 @@
         console.error("Global Error Caught:", message);
         console.error("Source:", source, "Line:", lineno, "Col:", colno);
         console.error("Error Object:", error);
-        
-        // Show error on screen if possible for easier debugging
-        const root = document.getElementById('root');
-        if (root) {
-          root.innerHTML += `<div style="color: red; padding: 20px; background: rgba(0,0,0,0.8); position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
-            <h3>Application Error</h3>
-            <pre>${message}</pre>
-            <p>Check console for details.</p>
-          </div>`;
-        }
       };
 
       // Polyfill process for browser environment to prevent crashes with env vars
@@ -94,6 +85,6 @@
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
+    <script type="text/babel" data-type="module" data-presets="react,typescript" src="./index.tsx"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ExternalLink, Github, Layers } from 'lucide-react';
-import { Project } from '../types';
+import { Project } from '../types.ts';
 
 const projects: Project[] = [
   {
