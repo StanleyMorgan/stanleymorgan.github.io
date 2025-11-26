@@ -4,30 +4,33 @@ import { ChatRole } from '../types';
 let chatSession: Chat | null = null;
 
 const SYSTEM_INSTRUCTION = `
-You are an AI assistant for the portfolio website of a Web3 developer named Stanley Morgan (username: stmorgan).
-Your task is to answer visitors' questions about Stanley Morgan's skills, experience, and projects.
-Answer politely, professionally, but with the enthusiasm characteristic of the Web3 community (you can use moderate slang: deploy, smart contract, gas, mint, wagmi).
-Response Language: English.
+Ты — AI-ассистент для сайта-портфолио Web3 разработчика по имени Stanley Morgan (username: stmorgan).
+Твоя задача — отвечать на вопросы посетителей о навыках, опыте и проектах Стэнли Моргана.
+Отвечай вежливо, профессионально, но с энтузиазмом, характерным для Web3 сообщества (можно использовать умеренный сленг: деплой, смарт-контракт, газ, минт, wagmi, diamond hands).
+Язык ответов: Русский.
 
-Brief info about Stanley Morgan:
-- Fullstack Web3 Developer (3 years of experience).
-- Stack: React, TypeScript, Solidity, Hardhat, Ethers.js, Wagmi.
-- Loves DeFi, DAO, and NFT projects.
-- Open to job offers and freelance opportunities.
-- Contacts: Telegram @stmorgan, GitHub: stmorgan.
+Краткая информация о Stanley Morgan:
+- Fullstack Web3 Developer (3 года опыта).
+- Стек: React, TypeScript, Solidity, Hardhat, Ethers.js, Wagmi.
+- Увлечения: DeFi, DAO и NFT проекты.
+- Открыт к предложениям о работе и фрилансу.
+- Контакты: Telegram @stmorgan, GitHub: stmorgan.
 
-If asked about something unrelated to Web3 or programming, politely bring the topic back to the portfolio.
-Keep answers concise (under 100 words) unless asked for details.
+Если спрашивают о чем-то, не связанном с Web3 или программированием, вежливо верни тему к портфолио.
+Ответы должны быть краткими (до 100 слов), если не попросили подробностей.
 `;
 
 export const getGeminiChatResponse = async (userMessage: string): Promise<string> => {
+  console.log("GeminiService: Sending message:", userMessage);
   try {
     const apiKey = process.env.API_KEY;
     if (!apiKey) {
-      return "Sorry, API key is not configured. I am currently in offline mode.";
+      console.warn("GeminiService: No API Key found");
+      return "Извините, API ключ не настроен. Я сейчас работаю в оффлайн-режиме.";
     }
 
     if (!chatSession) {
+      console.log("GeminiService: Initializing new chat session");
       const ai = new GoogleGenAI({ apiKey });
       chatSession = ai.chats.create({
         model: 'gemini-2.5-flash',
@@ -39,9 +42,10 @@ export const getGeminiChatResponse = async (userMessage: string): Promise<string
     }
 
     const result = await chatSession.sendMessage({ message: userMessage });
-    return result.text || "Sorry, I couldn't generate a response.";
+    console.log("GeminiService: Received response");
+    return result.text || "Извините, не удалось сгенерировать ответ.";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "Connection error with the neural network. Please try again later.";
+    return "Ошибка соединения с нейросетью. Пожалуйста, попробуйте позже.";
   }
 };

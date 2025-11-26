@@ -7,9 +7,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <script>
+      console.log("HTML: Script initialization started");
+      
+      // Global error handler
+      window.onerror = function(message, source, lineno, colno, error) {
+        console.error("Global Error Caught:", message);
+        console.error("Source:", source, "Line:", lineno, "Col:", colno);
+        console.error("Error Object:", error);
+        
+        // Show error on screen if possible for easier debugging
+        const root = document.getElementById('root');
+        if (root) {
+          root.innerHTML += `<div style="color: red; padding: 20px; background: rgba(0,0,0,0.8); position: fixed; top: 0; left: 0; width: 100%; z-index: 9999;">
+            <h3>Application Error</h3>
+            <pre>${message}</pre>
+            <p>Check console for details.</p>
+          </div>`;
+        }
+      };
+
       // Polyfill process for browser environment to prevent crashes with env vars
       if (typeof process === 'undefined') {
         window.process = { env: {} };
+        console.log("HTML: Process polyfill applied");
       }
     </script>
     <script>

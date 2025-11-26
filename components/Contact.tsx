@@ -33,7 +33,7 @@ const Contact: React.FC = () => {
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
           <p>© 2024 Stanley Morgan. All rights reserved.</p>
-          <p className="mt-2 md:mt-0">Powered by React & Gemini AI</p>
+          <p className="mt-2 md:mt-0">Powered by React</p>
         </div>
       </div>
     </section>

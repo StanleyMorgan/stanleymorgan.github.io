@@ -8,7 +8,7 @@ const ChatAssistant: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: ChatRole.MODEL,
-      text: "Hi! I'm Stanley Morgan's AI assistant. Ask me about his projects, skills, or Web3 experience.",
+      text: "Привет! Я AI-ассистент Стэнли Моргана. Спроси меня о его проектах, стеке технологий или опыте в Web3.",
       timestamp: new Date()
     }
   ]);
@@ -92,10 +92,10 @@ const ChatAssistant: React.FC = () => {
             <Bot className="w-5 h-5 text-web3-primary" />
           </div>
           <div>
-            <h3 className="font-bold text-white text-sm">AI Assistant</h3>
+            <h3 className="font-bold text-white text-sm">AI Ассистент</h3>
             <div className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-xs text-gray-400">Online | Gemini 2.5</span>
+              <span className="text-xs text-gray-400">Онлайн | Gemini 2.5</span>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@ const ChatAssistant: React.FC = () => {
             <div className="flex justify-start">
               <div className="bg-white/10 p-3 rounded-2xl rounded-tl-none flex items-center gap-2">
                 <Loader2 className="w-4 h-4 animate-spin text-web3-accent" />
-                <span className="text-xs text-gray-400">Thinking...</span>
+                <span className="text-xs text-gray-400">Думаю...</span>
               </div>
             </div>
           )}
@@ -138,7 +138,7 @@ const ChatAssistant: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Ask about skills..."
+              placeholder="Спросите о навыках..."
               className="flex-1 bg-transparent border-none outline-none text-white text-sm placeholder-gray-500"
               disabled={isLoading}
             />
