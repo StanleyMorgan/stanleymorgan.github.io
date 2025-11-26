@@ -4,6 +4,7 @@ import Hero from './components/Hero.tsx';
 import Projects from './components/Projects.tsx';
 import Skills from './components/Skills.tsx';
 import Contact from './components/Contact.tsx';
+import ChatAssistant from './components/ChatAssistant.tsx';
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Skills />
         <Contact />
       </main>
+      <ChatAssistant />
     </div>
   );
 };
