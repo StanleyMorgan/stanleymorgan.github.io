@@ -5,9 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Web3 Portfolio | Stanley Morgan</title>
     
-    <!-- Tailwind CSS (CDN for simplicity in this setup) -->
+    <!-- Logging & Error Handling -->
+    <script>
+      console.log("HTML: Document loading...");
+      window.onerror = function(msg, url, line, col, error) {
+        console.error("Global Error Detected:", msg, "\nURL:", url, "\nLine:", line, "\nError object:", error);
+        return false;
+      };
+    </script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
+      console.log("HTML: Configuring Tailwind");
       tailwind.config = {
         theme: {
           extend: {
@@ -74,6 +84,6 @@
 </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>
