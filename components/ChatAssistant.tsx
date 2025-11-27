@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Bot, User, Loader2 } from 'lucide-react';
+import { MessageSquare, X, Send, Bot, Loader2 } from 'lucide-react';
 import { ChatMessage, ChatRole } from '../types';
 import { getGeminiChatResponse } from '../services/geminiService';
 
@@ -8,7 +8,7 @@ const ChatAssistant: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: ChatRole.MODEL,
-      text: "Привет! Я AI-ассистент Стэнли Моргана. Спроси меня о его проектах, стеке технологий или опыте в Web3.",
+      text: "Привет! Я AI-ассистент Стэнли Моргана. Я говорю по-русски. Спросите меня о проектах, навыках или опыте в Web3.",
       timestamp: new Date()
     }
   ]);
@@ -56,6 +56,11 @@ const ChatAssistant: React.FC = () => {
       setMessages(prev => [...prev, botMsg]);
     } catch (error) {
       console.error(error);
+      setMessages(prev => [...prev, {
+        role: ChatRole.MODEL,
+        text: "Произошла ошибка при получении ответа.",
+        timestamp: new Date()
+      }]);
     } finally {
       setIsLoading(false);
     }
@@ -122,7 +127,7 @@ const ChatAssistant: React.FC = () => {
             <div className="flex justify-start">
               <div className="bg-white/10 p-3 rounded-2xl rounded-tl-none flex items-center gap-2">
                 <Loader2 className="w-4 h-4 animate-spin text-web3-accent" />
-                <span className="text-xs text-gray-400">Думаю...</span>
+                <span className="text-xs text-gray-400">Печатает...</span>
               </div>
             </div>
           )}
@@ -138,7 +143,7 @@ const ChatAssistant: React.FC = () => {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Спросите о навыках..."
+              placeholder="Напишите сообщение..."
               className="flex-1 bg-transparent border-none outline-none text-white text-sm placeholder-gray-500"
               disabled={isLoading}
             />

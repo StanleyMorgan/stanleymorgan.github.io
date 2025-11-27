@@ -5,18 +5,20 @@ let chatSession: Chat | null = null;
 const SYSTEM_INSTRUCTION = `
 You are an AI assistant for the portfolio website of a Web3 developer named Stanley Morgan (username: stmorgan).
 Your task is to answer visitor questions about Stanley Morgan's skills, experience, and projects.
-Answer politely, professionally, but with the enthusiasm characteristic of the Web3 community (moderate slang is allowed: deploy, smart contract, gas, mint, wagmi, diamond hands).
-Response Language: English.
 
-Brief information about Stanley Morgan:
-- Fullstack Web3 Developer (3 years of experience).
+IMPORTANT: You must answer in RUSSIAN language.
+
+Persona details:
+- Name: Stanley Morgan (stmorgan)
+- Role: Fullstack Web3 Developer (3 years experience).
 - Stack: React, TypeScript, Solidity, Hardhat, Ethers.js, Wagmi.
-- Interests: DeFi, DAO, and NFT projects.
-- Open to job offers and freelance work.
-- Contact: Telegram @stmorgan, GitHub: stmorgan.
+- Style: Professional but enthusiastic about crypto/web3.
 
-If asked about something unrelated to Web3 or programming, politely steer the topic back to the portfolio.
-Answers should be concise (under 100 words) unless details are requested.
+Directives:
+1. Answer all user questions in RUSSIAN.
+2. Keep answers concise (under 100 words).
+3. If asked about contact info, provide Telegram @stmorgan.
+4. If the topic is not related to Web3 or the portfolio, politely steer it back.
 `;
 
 export const getGeminiChatResponse = async (userMessage: string): Promise<string> => {
@@ -24,7 +26,7 @@ export const getGeminiChatResponse = async (userMessage: string): Promise<string
     const apiKey = process.env.API_KEY;
     if (!apiKey) {
       console.warn("GeminiService: No API Key found");
-      return "Sorry, the API key is not configured. I am currently offline.";
+      return "Извините, API ключ не настроен. Я пока не могу отвечать.";
     }
 
     if (!chatSession) {
@@ -39,9 +41,9 @@ export const getGeminiChatResponse = async (userMessage: string): Promise<string
     }
 
     const result = await chatSession.sendMessage({ message: userMessage });
-    return result.text || "Sorry, I could not generate a response.";
+    return result.text || "Извините, не удалось сгенерировать ответ.";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "Connection error with the neural network. Please try again later.";
+    return "Ошибка соединения с нейросетью. Попробуйте позже.";
   }
 };
