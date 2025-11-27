@@ -7,6 +7,7 @@ import Contact from './components/Contact.tsx';
 import ChatAssistant from './components/ChatAssistant.tsx';
 
 const App: React.FC = () => {
+  console.log("App: Component Rendering");
   return (
     <div className="min-h-screen bg-web3-dark text-white selection:bg-web3-accent selection:text-black">
       <Navbar />
